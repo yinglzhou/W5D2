@@ -124,17 +124,23 @@ def sparse_continents
   # population.
   # Hint: Sometimes rewording the problem can help you see the solution.
   execute(<<-SQL)
-    SELECT 
-      continent
+
+  SELECT
+    name, continent, population
+  FROM
+    countries
+  WHERE 
+    continent NOT IN 
+    (SELECT 
+      DISTINCT continent
     FROM 
       countries
-    GROUP BY 
-      continent
     WHERE
-      MAX < 25000000
+      population > 25000000)
+
   SQL
 end
 
-# smallest country = EACH COUNTRY LESS THAN 25M
-# continent where every country is smallest country
-# every country that is in that continent
+#list countries where pop is greater than 25
+#look at continents, see what isnt there
+#list countries in that missing continent
